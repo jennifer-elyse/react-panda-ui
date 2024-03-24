@@ -1,0 +1,63 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+*, :before, :after {
+  box-sizing: border-box;
+}
+
+html {
+  height: 100%;
+}
+body {
+  height: 100%;
+  background: #444;
+  font-family: 'Inter', Arial, sans-serif;
+}
+#app {
+  height: 100%;
+}
+main a {
+  text-align: center;
+  color: #4e4a46;
+  text-decoration: none;
+}
+main a:hover,
+main a:focus {
+  text-align: center;
+  color: #fff;
+}
+main {
+  height: 100%;
+  padding: 3em 2em;
+  background: #fff;
+  overflow: auto;
+}
+h1 {
+  text-align: center;
+  color: #003747;
+  font-weight: 800;
+  font-size: 3.75em;
+}
+h2 {
+  text-align: center;
+  color: #003747;
+  font-weight: 600;
+  font-size: 2.5em;
+}
+h3 {
+  text-align: center;
+  font-weight: 600;
+  font-size: 1.5em;
+}
+h4 {
+  text-align: center;
+  font-weight: 600;
+  font-size: 1em;
+}
+button {
+  color: #003747;
+}
+article > p {
+  text-align: left;
+}

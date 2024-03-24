@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<title></title>
+		<link rel="stylesheet" href="index.css">
+		<link rel="stylesheet" href="menu.css">
+		<link rel="stylesheet" href="font.css">
+		<link rel="shortcut icon" id="favicon" href="./assets/images/favicon.ico">
+		<style>
+		  .app-container {
+			display: grid;
+			grid-template-columns: 1fr 60% 1fr;
+			grid-gap: 10px;
+		  }
+		  .grid-container {
+			display: grid;
+			grid-template-columns: repeat(12, 1fr);
+			grid-gap: 5px;
+               height: 100%;
+			align-items: center;
+			justify-content: center;
+		  }
+		
+		  .grid-item {
+			border: 1px solid black;
+			height: 50px;
+			width: 50px;
+			display: flex;
+			align-items: center;
+			justify-content: center;
+		  }
+		
+		  .component-list {
+			list-style: none;
+			padding: 0;
+		  }
+		
+		  .component-list li {
+			margin-bottom: 10px;
+			cursor: grab;
+		  }
+		
+		  .component-list img {
+			width: 50px;
+			height: 50px;
+		  }
+		
+		  .props-div {
+			border: 1px solid black;
+			margin-top: 20px;
+			padding: 10px;
+		  }
+		</style>
+	</head>
+	<body>
+		<div id="app"></div>
+		<script type="module" src="index.js"></script>
+	</body>
+</html>
