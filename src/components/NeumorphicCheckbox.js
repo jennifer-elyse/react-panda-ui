@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { Checkbox } from 'react-aria-components';
 
 export default function NeumorphicCheckbox({ children, ...props }) {
@@ -36,7 +37,9 @@ export default function NeumorphicCheckbox({ children, ...props }) {
           }
         `}
       </style>
-      <div className="p4">
+      <div className="p4"
+        onDrop={(event) => props.handleDrop(event, props)}
+        onDragOver={(event) => event.preventDefault()}>
         <label className="flex items-center cursor-pointer">
           <Checkbox
             {...props}
