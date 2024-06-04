@@ -13,7 +13,7 @@ const DndPandaLayout = ({ props }) => {
   const [dropProps, setDropProps] = useState({});
   const [componentProps, setComponentProps] = useState({});
 
-  // const [appState, dispatch] = useAppState();react_panda-ui
+  // const [appState, dispatch] = useAppState();
 
 
 
@@ -27,21 +27,33 @@ const DndPandaLayout = ({ props }) => {
     return { ...Component.type, ...Component.children, ...Component.props };  
   }
 
-  const DynamicComponentRenderer = ({ componentType, props, children, propTypes }) => {
+  const DynamicComponentRenderer = ({ componentType, x, y, props, children, propTypes }) => {
     const Component = components[componentType].component;
 
     if (!Component) {
       return <div>Component not found</div>;
     }
-
+ 
     return (
-      <Component {...props} propTypes={propTypes}  {...componentProps} handleDrop={handleDrop}>
-        {children && children.map(({ type, props, children }, i) => {
+      <Component 
+        {...props} 
+        x={x} 
+        y={y} 
+        proptypes={propTypes}  
+        {...componentProps}
+        componentType={componentType} 
+        onDrop={handleDrop}
+        newfuckinthing="wtf">
+        {children && children.map(({ componentType, props, children }, i) => {
           return (
             <DynamicComponentRenderer
-              componentType={type}
+              componentType={componentType}
               props={props}
+              x={x}
+              y={y}
               children={children}
+              key={String(i)}
+              onDrop={handleDrop}
             >
             </DynamicComponentRenderer>
           );
@@ -52,6 +64,7 @@ const DndPandaLayout = ({ props }) => {
 
   const handleDrop = async (event, cellIndex) => {
     event.preventDefault();
+    event.stopPropagation();
     const ComponentType = components[event.dataTransfer.getData('component')].type;
     const Component = components[event.dataTransfer.getData('component')].component;
     const Box = components['box'].component;
@@ -59,7 +72,7 @@ const DndPandaLayout = ({ props }) => {
     // Add the component to the grid cell
     switch (ComponentType) {
       case 'box':
-        setComponentProps(getAllProps(<Component>Insert Text here</Component>));
+        setComponentProps(getAllProps(<Component onDrop={handleDrop}>Insert Text here</Component>));
         break;
       case 'button':
         setComponentProps(getAllProps(<Component>Press Me</Component>));
@@ -77,7 +90,9 @@ const DndPandaLayout = ({ props }) => {
     const newDropProps = { ...dropProps };
     newDropProps[cellIndex] = {
       type: ComponentType,
-      component: <ComponentType props={componentProps} />
+      component: <ComponentType
+        onDrop={handleDrop}
+        props={componentProps} />
     };
     setDropProps({ ...newDropProps });
   };
@@ -98,11 +113,13 @@ const DndPandaLayout = ({ props }) => {
         >
           {Object.entries({ ...dropProps }).map(([key, value], ii) => (
             i === parseInt(key, 10) ?
-              <div
-                key={ii}
-              >
-                <DynamicComponentRenderer componentType={value.component.type} x={i} y={ii}></DynamicComponentRenderer>
-              </div> : null
+                <DynamicComponentRenderer 
+                    componentType={value.component.type} 
+                    x={i} 
+                    y={ii}
+                    key={String(i).concat(ii)}
+                  ></DynamicComponentRenderer>
+               : null
           ))}
         </div>
       );
