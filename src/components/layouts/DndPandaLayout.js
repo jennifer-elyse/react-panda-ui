@@ -24,6 +24,7 @@ const DndPandaLayout = ({ props }) => {
     console.log('Component', Component);
     const defaultProps = Component.type.defaultProps || {};
     console.log('Component', Component, defaultProps);
+    console.log('Test');
     return { ...Component.type, ...Component.children, ...Component.props };  
   }
 
